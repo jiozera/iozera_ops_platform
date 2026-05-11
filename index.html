@@ -88,10 +88,25 @@ body { font-family: 'Inter', system-ui, sans-serif; }
 .inp::placeholder { color: rgba(255,255,255,0.2); }
 textarea.inp { resize: vertical; min-height: 80px; }
 select.inp option { background: #0b1020; }
-input[type="date"].inp, input[type="time"].inp {
-  background: rgba(255,255,255,0.06);
-  color: #e2e8f0;
+input[type="date"], input[type="time"] {
+  background-color: #111827 !important;
+  color: #e2e8f0 !important;
+  color-scheme: dark;
 }
+input[type="date"]::-webkit-datetime-edit,
+input[type="time"]::-webkit-datetime-edit { color: #e2e8f0; }
+input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+input[type="time"]::-webkit-datetime-edit-fields-wrapper { color: #e2e8f0; }
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="time"]::-webkit-datetime-edit-text { color: #94a3b8; }
+input[type="date"]::-webkit-datetime-edit-year-field,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="time"]::-webkit-datetime-edit-hour-field,
+input[type="time"]::-webkit-datetime-edit-minute-field,
+input[type="time"]::-webkit-datetime-edit-ampm-field { color: #e2e8f0; background: transparent; }
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(0.7) brightness(1.5); cursor: pointer; }
 .btn {
   padding: 8px 16px; background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
