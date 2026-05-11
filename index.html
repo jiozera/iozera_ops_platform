@@ -87,7 +87,19 @@ body { font-family: 'Inter', system-ui, sans-serif; }
 .inp:focus { border-color: rgba(124,58,237,0.6); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
 .inp::placeholder { color: rgba(255,255,255,0.2); }
 textarea.inp { resize: vertical; min-height: 80px; }
-select.inp option { background: #0b1020; }
+select.inp {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+select.inp option { background: #0d1117; color: #e2e8f0; }
+select.inp option[value=""] { color: rgba(255,255,255,0.25); }
+.inp-error { border-color: rgba(248,113,113,0.6) !important; box-shadow: 0 0 0 3px rgba(248,113,113,0.1) !important; }
+.form-hint { font-size: 11px; color: #f87171; margin-top: 6px; display: none; }
 input[type="date"], input[type="time"] {
   background-color: #111827 !important;
   color: #e2e8f0 !important;
@@ -450,6 +462,7 @@ input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(0.7) brig
           </select>
         </div>
         <button class="btn btn-p" onclick="addProject()"><span class="material-symbols-outlined text-sm">add</span>Add project</button>
+        <div class="form-hint" id="pr-hint">Please fill in all required fields (name, type, priority, status)</div>
       </div>
       <div class="glass-card">
         <div class="text-xs font-semibold text-white/25 uppercase tracking-widest mb-3">All projects</div>
@@ -497,6 +510,7 @@ input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(0.7) brig
           </select>
         </div>
         <button class="btn btn-p" onclick="addClient()"><span class="material-symbols-outlined text-sm">add</span>Add client</button>
+        <div class="form-hint" id="cl-hint">Please fill in client name, product, and stage</div>
       </div>
       <div class="glass-card">
         <div class="text-xs font-semibold text-white/25 uppercase tracking-widest mb-3">Client oversight board</div>
@@ -862,7 +876,15 @@ function addProject() {
   const pr=document.getElementById('pr-priority').value;
   const cl=document.getElementById('pr-client').value.trim();
   const st=document.getElementById('pr-status').value;
-  if(!n||!ty||!pr||!st) return;
+  // Clear previous error states
+  ['pr-name','pr-type','pr-priority','pr-status'].forEach(id=>document.getElementById(id).classList.remove('inp-error'));
+  let ok=true;
+  if(!n){document.getElementById('pr-name').classList.add('inp-error');ok=false;}
+  if(!ty){document.getElementById('pr-type').classList.add('inp-error');ok=false;}
+  if(!pr){document.getElementById('pr-priority').classList.add('inp-error');ok=false;}
+  if(!st){document.getElementById('pr-status').classList.add('inp-error');ok=false;}
+  if(!ok){document.getElementById('pr-hint').style.display='block';return;}
+  document.getElementById('pr-hint').style.display='none';
   const projs=load(K.projects)||[];
   projs.push({id:Date.now(),name:n,type:ty,priority:pr,client:cl,status:st,owner:user.name});
   store(K.projects,projs); renderProjects(projs);
@@ -896,7 +918,13 @@ function addClient() {
   const st=document.getElementById('cl-stage').value;
   const ag=document.getElementById('cl-agent').value.trim();
   const h=document.getElementById('cl-health').value;
-  if(!n||!pr||!st) return;
+  ['cl-name','cl-product','cl-stage'].forEach(id=>document.getElementById(id).classList.remove('inp-error'));
+  let ok=true;
+  if(!n){document.getElementById('cl-name').classList.add('inp-error');ok=false;}
+  if(!pr){document.getElementById('cl-product').classList.add('inp-error');ok=false;}
+  if(!st){document.getElementById('cl-stage').classList.add('inp-error');ok=false;}
+  if(!ok){document.getElementById('cl-hint').style.display='block';return;}
+  document.getElementById('cl-hint').style.display='none';
   const cls=load(K.clients)||[];
   cls.push({id:Date.now(),name:n,product:pr,stage:st,agent:ag,health:h,tl:user.name});
   store(K.clients,cls); renderClients(cls);
