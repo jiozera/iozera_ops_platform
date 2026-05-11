@@ -6,110 +6,157 @@
 <title>Iozera Ops</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;background:#080810;color:#d0d0e0;min-height:100vh}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080810;--bg2:#0b0b14;--bg3:#0d0d1a;
+  --border:#15152a;--border2:#1e1e30;
+  --text:#d0d0e0;--t2:#888;--t3:#555;--t4:#333;
+  --accent:#5b6af0;--a2:#818cf8;--a3:#a5b4fc;--a4:#c7d2fe;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#1e1e30;border-radius:4px}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+
 /* LOGIN */
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-.login-card{background:#0f0f1a;border:1px solid #1e1e30;border-radius:14px;padding:36px;width:100%;max-width:420px}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,rgba(91,106,240,.07) 0%,transparent 60%)}
+.login-card{background:var(--bg3);border:1px solid var(--border2);border-radius:14px;padding:36px;width:100%;max-width:440px;box-shadow:0 24px 64px rgba(0,0,0,.4)}
 .login-logo{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.5px;margin-bottom:4px}
-.login-sub{font-size:12px;color:#444;margin-bottom:28px;letter-spacing:.5px;text-transform:uppercase}
-.login-label{font-size:11px;color:#555;margin-bottom:6px;font-weight:500;letter-spacing:.3px}
-.login-inp{width:100%;padding:10px 12px;background:#080810;border:1px solid #1e1e30;border-radius:7px;color:#e0e0f0;font-size:13px;outline:none;margin-bottom:14px}
-.login-inp:focus{border-color:#5b6af0}
-.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
-.role-opt{padding:10px 12px;background:#080810;border:1px solid #1e1e30;border-radius:7px;font-size:12px;color:#666;cursor:pointer;text-align:center;transition:all .15s}
+.login-sub{font-size:11px;color:var(--t4);margin-bottom:28px;letter-spacing:.6px;text-transform:uppercase}
+.form-lbl{font-size:11px;color:var(--t3);margin-bottom:6px;font-weight:500;letter-spacing:.3px;display:block}
+.login-inp{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border2);border-radius:7px;color:#e0e0f0;font-size:13px;outline:none;margin-bottom:16px;transition:border-color .15s;font-family:inherit}
+.login-inp:focus{border-color:var(--accent)}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:20px}
+.role-opt{padding:10px 12px;background:var(--bg);border:1px solid var(--border2);border-radius:7px;font-size:12px;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;user-select:none}
 .role-opt:hover{border-color:#2e2e5a;color:#aaa}
-.role-opt.sel{border-color:#5b6af0;color:#818cf8;background:#0d0d20}
-.login-btn{width:100%;padding:11px;background:#1e1e3a;border:1px solid #3e3e7a;border-radius:7px;color:#a5b4fc;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.role-opt.sel{border-color:var(--accent);color:var(--a2);background:#0d0d20}
+.login-btn{width:100%;padding:11px;background:#1e1e3a;border:1px solid #3e3e7a;border-radius:7px;color:var(--a3);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit}
 .login-btn:hover{background:#2a2a52}
+
 /* APP */
 .app{display:flex;height:100vh;overflow:hidden}
-.sidebar{width:196px;background:#0b0b14;border-right:1px solid #15152a;display:flex;flex-direction:column;flex-shrink:0}
-.s-head{padding:18px 16px 14px;border-bottom:1px solid #15152a}
+.sidebar{width:200px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:transform .25s ease;z-index:100}
+.s-head{padding:18px 16px 14px;border-bottom:1px solid var(--border)}
 .s-logo{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.3px}
-.s-user{font-size:11px;color:#444;margin-top:3px}
+.s-user{font-size:11px;color:var(--t4);margin-top:3px}
 .s-nav{padding:10px 0;flex:1;overflow-y:auto}
-.n-section{font-size:9px;color:#333;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:12px 16px 4px}
-.nav-btn{display:flex;align-items:center;gap:9px;width:100%;padding:8px 16px;font-size:12px;color:#555;cursor:pointer;border:none;background:none;border-left:2px solid transparent;transition:all .12s;text-align:left}
+.n-section{font-size:9px;color:#2a2a3a;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:14px 16px 5px}
+.nav-btn{display:flex;align-items:center;gap:9px;width:100%;padding:8px 16px;font-size:12px;color:var(--t3);cursor:pointer;border:none;background:none;border-left:2px solid transparent;transition:all .12s;text-align:left;font-family:inherit}
 .nav-btn:hover{color:#999;background:#0f0f1e}
-.nav-btn.active{color:#c7d2fe;background:#0f0f1e;border-left-color:#5b6af0}
+.nav-btn.active{color:var(--a4);background:#0f0f1e;border-left-color:var(--accent)}
 .nav-btn i{font-size:15px;flex-shrink:0}
-.nav-btn .badge-dot{width:6px;height:6px;border-radius:50%;background:#f87171;margin-left:auto;flex-shrink:0}
-.s-foot{padding:12px 16px;border-top:1px solid #15152a}
-.logout-btn{font-size:11px;color:#333;cursor:pointer;display:flex;align-items:center;gap:6px}
+.s-foot{padding:12px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.logout-btn{font-size:11px;color:var(--t4);cursor:pointer;display:flex;align-items:center;gap:6px;transition:color .12s;background:none;border:none;font-family:inherit}
 .logout-btn:hover{color:#666}
+.icon-btn{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--t4);cursor:pointer;border-radius:5px;transition:all .12s;background:none;border:none}
+.icon-btn:hover{color:#888;background:#15152a}
+
 /* MAIN */
-.main{flex:1;overflow-y:auto;background:#080810}
-.sec{display:none;padding:22px 26px;max-width:940px}
-.sec.active{display:block}
+.main{flex:1;overflow-y:auto;background:var(--bg)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.sec{display:none;padding:24px 28px;max-width:960px}
+.sec.active{display:block;animation:fadeUp .18s ease}
 .pg-title{font-size:17px;font-weight:600;color:#fff;margin-bottom:2px}
-.pg-sub{font-size:12px;color:#444;margin-bottom:18px}
+.pg-sub{font-size:12px;color:var(--t4);margin-bottom:20px}
+
 /* CARDS */
-.card{background:#0d0d1a;border:1px solid #15152a;border-radius:10px;padding:15px;margin-bottom:10px}
-.card-lbl{font-size:9px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:#333;margin-bottom:11px}
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:10px}
+.card-lbl{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--t4);margin-bottom:12px}
+
 /* GRID */
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-/* STAT */
-.stat{background:#0d0d1a;border:1px solid #15152a;border-radius:8px;padding:13px;text-align:center}
-.stat-lbl{font-size:10px;color:#444;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
-.stat-n{font-size:24px;font-weight:600;color:#fff}
+
+/* STATS */
+.stat{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.stat-lbl{font-size:10px;color:var(--t3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.stat-n{font-size:26px;font-weight:600;color:#fff;line-height:1}
+
 /* INPUTS */
-.inp{width:100%;padding:8px 10px;background:#080810;border:1px solid #1a1a2e;border-radius:6px;color:#d0d0e0;font-size:12px;outline:none;font-family:inherit}
-.inp:focus{border-color:#5b6af0}
-.inp::placeholder{color:#2a2a3a}
-textarea.inp{resize:vertical;min-height:75px}
-select.inp option{background:#0d0d1a}
+.inp{width:100%;padding:8px 11px;background:var(--bg);border:1px solid #1a1a2e;border-radius:6px;color:var(--text);font-size:12px;outline:none;font-family:inherit;transition:border-color .15s}
+.inp:focus{border-color:var(--accent)}
+.inp::placeholder{color:#252535}
+textarea.inp{resize:vertical;min-height:78px}
+select.inp option{background:var(--bg3)}
+
 /* BUTTONS */
-.btn{padding:7px 14px;background:#13132a;border:1px solid #2a2a4a;border-radius:6px;color:#818cf8;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .12s;font-family:inherit}
-.btn:hover{background:#1e1e3a;border-color:#5b6af0}
-.btn-p{background:#1a1a3a;border-color:#4a4a9a;color:#a5b4fc}
+.btn{padding:7px 14px;background:#13132a;border:1px solid #2a2a4a;border-radius:6px;color:var(--a2);font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .12s;font-family:inherit;white-space:nowrap}
+.btn:hover{background:#1e1e3a;border-color:var(--accent)}
+.btn-p{background:#1a1a3a;border-color:#4a4a9a;color:var(--a3)}
 .btn-p:hover{background:#232366}
 .btn-sm{padding:4px 9px;font-size:10px}
 .btn-danger{background:#200a0a;border-color:#4a1a1a;color:#f87171}
+.btn-danger:hover{background:#2d0f0f}
+
 /* BADGES */
 .b{display:inline-flex;align-items:center;font-size:10px;padding:2px 9px;border-radius:20px;font-weight:500;white-space:nowrap}
-.b-blue{background:#0f1540;color:#818cf8}
+.b-blue{background:#0f1540;color:var(--a2)}
 .b-green{background:#0a2010;color:#4ade80}
 .b-amber{background:#201500;color:#fbbf24}
 .b-red{background:#200808;color:#f87171}
-.b-gray{background:#131320;color:#555}
+.b-gray{background:#131320;color:var(--t3)}
 .b-teal{background:#051a18;color:#2dd4bf}
 .b-pink{background:#200f20;color:#e879f9}
+
 /* TABLE */
-.th{display:grid;gap:8px;padding:5px 0 9px;border-bottom:1px solid #13132a;font-size:9px;color:#333;font-weight:700;letter-spacing:.7px;text-transform:uppercase}
-.tr{display:grid;gap:8px;padding:9px 0;border-bottom:1px solid #0f0f1e;align-items:center;font-size:12px}
+.th{display:grid;gap:8px;padding:5px 0 9px;border-bottom:1px solid #13132a;font-size:9px;color:var(--t4);font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.tr{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid #0f0f1e;align-items:center;font-size:12px}
 .tr:last-child{border-bottom:none}
+
 /* CHECKLIST */
-.ci{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #0f0f1e}
+.ci{display:flex;align-items:flex-start;gap:11px;padding:10px 0;border-bottom:1px solid #0f0f1e}
 .ci:last-child{border-bottom:none}
-.cb{width:15px;height:15px;border:1px solid #2a2a4a;border-radius:3px;cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .12s}
-.cb.on{background:#5b6af0;border-color:#5b6af0}
+.cb{width:16px;height:16px;border:1px solid #2a2a4a;border-radius:4px;cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.cb:hover{border-color:var(--accent)}
+.cb.on{background:var(--accent);border-color:var(--accent)}
 .cb.on::after{content:'✓';font-size:9px;color:#fff}
-.ci-text{font-size:12px;color:#888;line-height:1.5}
+.ci-text{font-size:12px;color:var(--t2);line-height:1.5}
 .ci-text b{color:#ccc;display:block;margin-bottom:1px;font-size:12px}
 .ci-text.done b,.ci-text.done{color:#2a2a3a;text-decoration:line-through}
-/* AI */
-.ai-box{background:#060610;border:1px solid #15152a;border-radius:8px;padding:14px;margin-top:10px}
-.ai-out{font-size:12px;color:#888;line-height:1.8;min-height:70px;white-space:pre-wrap;word-break:break-word}
-.ai-out.wait{color:#333;font-style:italic}
+
+/* AI / CHAT */
+.ai-box{background:#060610;border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:10px}
+.ai-out{font-size:12px;color:var(--t2);line-height:1.8;min-height:70px;white-space:pre-wrap;word-break:break-word}
+.ai-out.wait{color:var(--t4);font-style:italic}
 .chat-wrap{display:flex;flex-direction:column;gap:9px;min-height:140px;max-height:340px;overflow-y:auto;margin-bottom:12px;padding-right:4px}
-.cm-u{background:#131340;border-radius:8px;padding:9px 13px;font-size:12px;color:#c7d2fe;align-self:flex-end;max-width:78%;line-height:1.6}
-.cm-a{background:#0d0d1a;border:1px solid #15152a;border-radius:8px;padding:9px 13px;font-size:12px;color:#888;max-width:88%;line-height:1.6}
+.cm-u{background:#131340;border-radius:8px;padding:9px 13px;font-size:12px;color:var(--a4);align-self:flex-end;max-width:78%;line-height:1.6}
+.cm-a{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 13px;font-size:12px;color:var(--t2);max-width:88%;line-height:1.6}
+
 /* MISC */
-.empty{font-size:12px;color:#222;padding:16px 0;text-align:center}
+.empty{font-size:12px;color:#222;padding:18px 0;text-align:center}
 .tag-row{display:flex;flex-wrap:wrap;gap:5px}
-.divider{height:1px;background:#0f0f1e;margin:12px 0}
-.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:6px;background:#0f1030;border:1px solid #2a2a5a;font-size:11px;color:#818cf8;cursor:pointer;margin:3px;transition:all .12s}
-.pill.off{background:#0a0a14;border-color:#1a1a2a;color:#333}
-.pill:hover{border-color:#5b6af0}
-.restricted-msg{text-align:center;padding:40px 20px;color:#333}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;background:#0f1030;border:1px solid #2a2a5a;font-size:11px;color:var(--a2);cursor:pointer;margin:3px;transition:all .12s;user-select:none}
+.pill.off{background:#0a0a14;border-color:#1a1a2a;color:var(--t4)}
+.pill:hover{border-color:var(--accent)}
+.restricted-msg{text-align:center;padding:48px 20px;color:var(--t4)}
 .restricted-msg i{font-size:36px;display:block;margin-bottom:10px}
-.restricted-msg p{font-size:13px}
-.week-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.person-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #0f0f1e;font-size:12px}
+.restricted-msg p{font-size:13px;line-height:1.7}
+.person-row{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid #0f0f1e;font-size:12px}
 .person-row:last-child{border-bottom:none}
-.avatar{width:26px;height:26px;border-radius:50%;background:#1a1a3a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#818cf8;flex-shrink:0}
+.avatar{width:28px;height:28px;border-radius:50%;background:#1a1a3a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--a2);flex-shrink:0}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:1000;padding:24px;backdrop-filter:blur(3px)}
+.modal{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:28px;width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.modal-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:6px}
+.modal-sub{font-size:12px;color:var(--t3);margin-bottom:20px;line-height:1.6}
+.modal-actions{display:flex;gap:8px;margin-top:14px}
+
+/* MOBILE */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
+.mobile-bar{display:none;align-items:center;gap:12px;padding:13px 18px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.menu-btn{background:none;border:none;color:var(--t3);cursor:pointer;padding:4px;font-size:20px;display:flex;align-items:center}
+@media(max-width:640px){
+  .app{flex-direction:column}
+  .mobile-bar{display:flex}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay.open{display:block}
+  .sec{padding:16px 18px}
+  .g3,.g2{grid-template-columns:1fr}
+  .th>*:not(:first-child){display:none}
+  .tr{grid-template-columns:1fr!important}
+}
 </style>
 </head>
 <body>
@@ -119,17 +166,17 @@ select.inp option{background:#0d0d1a}
   <div class="login-card">
     <div class="login-logo">Iozera Ops</div>
     <div class="login-sub">Operations Platform</div>
-    <div class="login-label">Your name</div>
-    <input class="login-inp" id="li-name" placeholder="Enter your name" onkeydown="if(event.key==='Enter')doLogin()">
-    <div class="login-label">Your role</div>
-    <div class="role-grid" id="role-grid">
+    <label class="form-lbl">Your name</label>
+    <input class="login-inp" id="li-name" placeholder="Enter your name" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+    <label class="form-lbl">Your role</label>
+    <div class="role-grid">
       <div class="role-opt" onclick="selRole(this,'Team Leader')">Team Leader</div>
       <div class="role-opt" onclick="selRole(this,'Technical Manager')">Technical Manager</div>
       <div class="role-opt" onclick="selRole(this,'Operations Manager')">Operations Manager</div>
       <div class="role-opt" onclick="selRole(this,'Onboarding Lead')">Onboarding Lead</div>
     </div>
-    <div class="login-label" style="margin-bottom:8px">Assigned products (select all you sell)</div>
-    <div class="tag-row" id="prod-sel" style="margin-bottom:18px">
+    <label class="form-lbl" style="margin-bottom:8px">Assigned products (select all you sell)</label>
+    <div class="tag-row" id="prod-sel" style="margin-bottom:20px">
       <div class="pill off" onclick="toggleProd(this,'Upserv.ai')"><i class="ti ti-check" style="display:none;font-size:11px"></i>Upserv.ai</div>
       <div class="pill off" onclick="toggleProd(this,'Kriss.ai')"><i class="ti ti-check" style="display:none;font-size:11px"></i>Kriss.ai</div>
       <div class="pill off" onclick="toggleProd(this,'Chatli.ai')"><i class="ti ti-check" style="display:none;font-size:11px"></i>Chatli.ai</div>
@@ -140,7 +187,9 @@ select.inp option{background:#0d0d1a}
 
 <!-- APP -->
 <div class="app" id="app-screen" style="display:none">
-  <div class="sidebar">
+  <div class="sidebar-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+
+  <div class="sidebar" id="sidebar">
     <div class="s-head">
       <div class="s-logo">Iozera Ops</div>
       <div class="s-user" id="s-username">—</div>
@@ -149,48 +198,51 @@ select.inp option{background:#0d0d1a}
       <div class="n-section">Overview</div>
       <button class="nav-btn active" onclick="go('dashboard',this)"><i class="ti ti-layout-dashboard"></i>Dashboard</button>
       <button class="nav-btn" onclick="go('checklist',this)"><i class="ti ti-checkbox"></i>Daily checklist</button>
-
       <div class="n-section">Work</div>
       <button class="nav-btn" onclick="go('projects',this)"><i class="ti ti-clipboard-list"></i>Projects</button>
       <button class="nav-btn" onclick="go('clients',this)"><i class="ti ti-users"></i>Client follow-up</button>
       <button class="nav-btn" id="nav-sessions" onclick="go('sessions',this)"><i class="ti ti-calendar-event"></i>Work sessions</button>
       <button class="nav-btn" id="nav-onboarding" onclick="go('onboarding',this)"><i class="ti ti-school"></i>Onboarding</button>
-
       <div class="n-section">Tools</div>
-      <button class="nav-btn" id="nav-content" onclick="go('content',this)"><i class="ti ti-brand-linkedin"></i>Content</button>
+      <button class="nav-btn" onclick="go('content',this)"><i class="ti ti-brand-linkedin"></i>Content</button>
       <button class="nav-btn" onclick="go('timclone',this)"><i class="ti ti-robot"></i>Tim Clone</button>
       <button class="nav-btn" onclick="go('report',this)"><i class="ti ti-send"></i>Weekly report</button>
     </div>
     <div class="s-foot">
-      <div class="logout-btn" onclick="logout()"><i class="ti ti-logout" style="font-size:13px"></i>Sign out</div>
+      <button class="logout-btn" onclick="logout()"><i class="ti ti-logout" style="font-size:13px"></i>Sign out</button>
+      <button class="icon-btn" onclick="openSettings()" title="API settings"><i class="ti ti-settings" style="font-size:14px"></i></button>
     </div>
   </div>
 
   <div class="main">
+    <div class="mobile-bar">
+      <button class="menu-btn" onclick="openSidebar()"><i class="ti ti-menu-2"></i></button>
+      <div class="s-logo">Iozera Ops</div>
+    </div>
 
     <!-- DASHBOARD -->
     <div id="sec-dashboard" class="sec active">
       <div class="pg-title">Dashboard</div>
       <div class="pg-sub" id="dash-sub">Welcome back</div>
       <div class="g3" style="margin-bottom:12px">
-        <div class="stat"><div class="stat-lbl">My projects</div><div class="stat-n" id="ds-proj">0</div></div>
-        <div class="stat"><div class="stat-lbl">My clients</div><div class="stat-n" id="ds-cli">0</div></div>
+        <div class="stat"><div class="stat-lbl">Active projects</div><div class="stat-n" id="ds-proj">0</div></div>
+        <div class="stat"><div class="stat-lbl">Clients tracked</div><div class="stat-n" id="ds-cli">0</div></div>
         <div class="stat"><div class="stat-lbl">Checklist today</div><div class="stat-n" id="ds-chk">0/6</div></div>
       </div>
-      <div class="card" id="dash-role-card">
+      <div class="card">
         <div class="card-lbl">Your profile</div>
         <div style="display:flex;flex-wrap:wrap;gap:6px" id="dash-roles"></div>
       </div>
       <div class="card">
         <div class="card-lbl">Team activity — today</div>
-        <div id="dash-team"><div class="empty">Loading team...</div></div>
+        <div id="dash-team"><div class="empty">No other team members active today yet</div></div>
       </div>
       <div class="card">
         <div class="card-lbl">Weekly rhythm</div>
-        <div style="font-size:12px;color:#555;line-height:2">
-          <span style="color:#818cf8;font-weight:600">Mon</span> — Submit 1 priority + 1 blocker before AMA with Tim &nbsp;·&nbsp;
-          <span style="color:#818cf8;font-weight:600">Wed</span> — Pipeline + agent check-in &nbsp;·&nbsp;
-          <span style="color:#818cf8;font-weight:600">Fri</span> — Submit weekly report to ops team
+        <div style="font-size:12px;color:var(--t3);line-height:2.1">
+          <span style="color:var(--a2);font-weight:600">Mon</span> — Submit 1 priority + 1 blocker before AMA with Tim &nbsp;·&nbsp;
+          <span style="color:var(--a2);font-weight:600">Wed</span> — Pipeline + agent check-in &nbsp;·&nbsp;
+          <span style="color:var(--a2);font-weight:600">Fri</span> — Submit weekly report to ops team
         </div>
       </div>
     </div>
@@ -214,7 +266,7 @@ select.inp option{background:#0d0d1a}
         <div class="ci" id="ci4"><div class="cb" onclick="tick(4)"></div><div class="ci-text"><b>Update project and client statuses</b>One line per item. Ops team sees it without chasing you.</div></div>
         <div class="ci" id="ci5"><div class="cb" onclick="tick(5)"></div><div class="ci-text"><b>Set tomorrow's next actions</b>Every open client and project needs a next step with a date.</div></div>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
+      <div style="display:flex;align-items:center;margin-top:8px">
         <button class="btn" onclick="resetChecklist()"><i class="ti ti-refresh"></i>Reset mine</button>
       </div>
       <div class="card" style="margin-top:14px">
@@ -260,25 +312,25 @@ select.inp option{background:#0d0d1a}
       </div>
       <div class="card">
         <div class="card-lbl">All projects</div>
-        <div class="th" style="grid-template-columns:1fr 110px 100px 110px 90px 50px">
+        <div class="th" style="grid-template-columns:1fr 110px 100px 110px 90px 40px">
           <div>Project</div><div>Type</div><div>Client</div><div>Priority</div><div>Status</div><div></div>
         </div>
         <div id="proj-list"><div class="empty">No projects yet</div></div>
       </div>
     </div>
 
-    <!-- CLIENT FOLLOW-UP -->
+    <!-- CLIENTS -->
     <div id="sec-clients" class="sec">
       <div class="pg-title">Client follow-up</div>
       <div class="pg-sub">TL oversight — agents do the actual follow-up. Flag who's dropping the ball.</div>
       <div class="card">
-        <div class="card-lbl">Follow-up cadence (agents follow this)</div>
-        <div style="display:flex;flex-direction:column;gap:0">
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:6px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 0</span><span style="color:#555">First contact. One problem, one solution, one question.</span></div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:6px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 1</span><span style="color:#555">Follow-up if no reply. Add value. Never "just checking in."</span></div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:6px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 3</span><span style="color:#555">Different angle — focus on business outcome. Ask for a call.</span></div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:6px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 7</span><span style="color:#555">Final attempt. Soft exit. Log as cold and move on.</span></div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:6px 0;font-size:12px"><span style="color:#4ade80;font-weight:600">Active</span><span style="color:#555">Week 1 onboarding · Week 2 check-in · Month 1 satisfaction · Month 3 renewal.</span></div>
+        <div class="card-lbl">Follow-up cadence</div>
+        <div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 0</span><span style="color:var(--t3)">First contact. One problem, one solution, one question.</span></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 1</span><span style="color:var(--t3)">Follow-up if no reply. Add value. Never "just checking in."</span></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 3</span><span style="color:var(--t3)">Different angle — focus on business outcome. Ask for a call.</span></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 7</span><span style="color:var(--t3)">Final attempt. Soft exit. Log as cold and move on.</span></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:10px;padding:7px 0;font-size:12px"><span style="color:#4ade80;font-weight:600">Active</span><span style="color:var(--t3)">Week 1 onboarding · Week 2 check-in · Month 1 satisfaction · Month 3 renewal.</span></div>
         </div>
       </div>
       <div class="card">
@@ -305,7 +357,7 @@ select.inp option{background:#0d0d1a}
       </div>
       <div class="card">
         <div class="card-lbl">Client oversight board</div>
-        <div class="th" style="grid-template-columns:1fr 90px 90px 110px 110px 50px">
+        <div class="th" style="grid-template-columns:1fr 90px 90px 110px 110px 40px">
           <div>Client</div><div>Product</div><div>Stage</div><div>Agent</div><div>Health</div><div></div>
         </div>
         <div id="client-list"><div class="empty">No clients tracked yet</div></div>
@@ -328,7 +380,7 @@ select.inp option{background:#0d0d1a}
       </div>
       <div class="card">
         <div class="card-lbl">Upcoming sessions</div>
-        <div class="th" style="grid-template-columns:1fr 100px 80px 1fr 50px">
+        <div class="th" style="grid-template-columns:1fr 100px 80px 1fr 40px">
           <div>Topic</div><div>Date</div><div>Time</div><div>Attendees</div><div></div>
         </div>
         <div id="sessions-list"><div class="empty">No sessions scheduled</div></div>
@@ -338,15 +390,15 @@ select.inp option{background:#0d0d1a}
     <!-- ONBOARDING -->
     <div id="sec-onboarding" class="sec">
       <div class="pg-title">Onboarding</div>
-      <div class="pg-sub">First week introduction for new team members — assigned onboarding leads only.</div>
+      <div class="pg-sub">First week introduction for new team members.</div>
       <div class="card">
-        <div class="card-lbl">Week 1 onboarding checklist — new member</div>
-        <div style="display:flex;flex-direction:column;gap:0">
-          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 1</span><span style="color:#666">Welcome + company overview. What is Iozera, what we're building, who Tim is. Products: Upserv, Kriss, Chatli, Ageni. Vision: sovereign AI for SMBs.</span></div>
-          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 2</span><span style="color:#666">Product deep dive. What each product does, who it's for, real use cases. Agent learns their assigned product.</span></div>
-          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 3</span><span style="color:#666">Sales framework. Discovery → Research → Execution stages. Bridge Conversational Model. How to open, qualify, handle objections.</span></div>
-          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 4</span><span style="color:#666">Tools and platforms. SAOS walkthrough. WhatsApp outreach structure. Discord channels. Follow-up cadence.</span></div>
-          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:8px 0;font-size:12px"><span style="color:#818cf8;font-weight:600">Day 5</span><span style="color:#666">First outreach attempt with TL present. Review and feedback. Agent confirms they're ready to go live.</span></div>
+        <div class="card-lbl">Week 1 checklist — new member</div>
+        <div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 1</span><span style="color:var(--t3)">Welcome + company overview. What is Iozera, what we're building, who Tim is. Products: Upserv, Kriss, Chatli, Ageni. Vision: sovereign AI for SMBs.</span></div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 2</span><span style="color:var(--t3)">Product deep dive. What each product does, who it's for, real use cases. Agent learns their assigned product.</span></div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 3</span><span style="color:var(--t3)">Sales framework. Discovery → Research → Execution stages. Bridge Conversational Model. How to open, qualify, handle objections.</span></div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #0f0f1e;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 4</span><span style="color:var(--t3)">Tools and platforms. SAOS walkthrough. WhatsApp outreach structure. Discord channels. Follow-up cadence.</span></div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;padding:9px 0;font-size:12px"><span style="color:var(--a2);font-weight:600">Day 5</span><span style="color:var(--t3)">First outreach attempt with TL present. Review and feedback. Agent confirms they're ready to go live.</span></div>
         </div>
       </div>
       <div class="card">
@@ -380,7 +432,7 @@ select.inp option{background:#0d0d1a}
         </div>
         <div class="card">
           <div class="card-lbl">Topic or idea</div>
-          <textarea class="inp" id="ct-topic" placeholder="e.g. Why SMBs lose customers without AI service tools&#10;What makes Upserv different from a basic chatbot&#10;Iozera's sovereign AI vision&#10;Product launch announcement"></textarea>
+          <textarea class="inp" id="ct-topic" placeholder="e.g. Why SMBs lose customers without AI service tools&#10;What makes Upserv different from a basic chatbot&#10;Iozera's sovereign AI vision"></textarea>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
             <button class="btn btn-p" onclick="genContent('linkedin')"><i class="ti ti-brand-linkedin"></i>LinkedIn post</button>
             <button class="btn" onclick="genContent('announcement')"><i class="ti ti-speakerphone"></i>Announcement</button>
@@ -388,7 +440,7 @@ select.inp option{background:#0d0d1a}
           </div>
         </div>
         <div class="ai-box" id="ct-box" style="display:none">
-          <div class="card-lbl" style="margin-bottom:8px">Generated — <span id="ct-acct-label" style="color:#818cf8"></span></div>
+          <div class="card-lbl" style="margin-bottom:8px">Generated — <span id="ct-acct-label" style="color:var(--a2)"></span></div>
           <div id="ct-out" class="ai-out"></div>
           <div style="margin-top:10px;display:flex;gap:7px">
             <button class="btn btn-sm" onclick="cp('ct-out')"><i class="ti ti-copy"></i>Copy</button>
@@ -403,7 +455,7 @@ select.inp option{background:#0d0d1a}
       <div class="pg-title">Tim Clone</div>
       <div class="pg-sub">AI trained on Iozera's products, structure, and Tim's thinking. Ask anything.</div>
       <div class="card" style="padding:0;overflow:hidden">
-        <div style="padding:12px 15px;border-bottom:1px solid #15152a;font-size:11px;color:#444">Your roles are loaded — Tim Clone gives role-specific answers</div>
+        <div style="padding:12px 15px;border-bottom:1px solid var(--border);font-size:11px;color:var(--t4)">Your role is loaded — Tim Clone gives role-specific answers</div>
         <div style="padding:14px 15px">
           <div class="chat-wrap" id="chat-msgs">
             <div class="cm-a">Hey. I'm Tim Clone — I know Iozera's products, the team structure, the sales framework, and how we operate. Ask me anything about a deal, a client situation, how to run your team, or what Iozera stands for.</div>
@@ -422,29 +474,14 @@ select.inp option{background:#0d0d1a}
       <div class="pg-sub">Submitted to the ops team every Friday. 10 min max.</div>
       <div class="card">
         <div class="card-lbl">Week of</div>
-        <input class="inp" id="rp-week" type="date" style="max-width:200px;margin-bottom:0">
+        <input class="inp" id="rp-week" type="date" style="max-width:200px">
       </div>
-      <div class="card">
-        <div class="card-lbl">1 — What I completed this week</div>
-        <textarea class="inp" id="rp-1" placeholder="Specific. Not 'worked on things.' List what actually got done."></textarea>
-      </div>
-      <div class="card">
-        <div class="card-lbl">2 — What did not get done and why</div>
-        <textarea class="inp" id="rp-2" placeholder="No hiding. If it slipped, say why. This is how blockers get fixed."></textarea>
-      </div>
-      <div class="card">
-        <div class="card-lbl">3 — Client or agent issues this week</div>
-        <textarea class="inp" id="rp-3" placeholder="Any complaints, drop-offs, or at-risk situations. Nothing hidden."></textarea>
-      </div>
-      <div class="card">
-        <div class="card-lbl">4 — My priority for next week</div>
-        <textarea class="inp" id="rp-4" placeholder="One thing. Not a list. The one thing that moves the needle most."></textarea>
-      </div>
-      <div class="card">
-        <div class="card-lbl">5 — What I need from the ops team</div>
-        <textarea class="inp" id="rp-5" placeholder="One specific ask. If nothing needed, write 'nothing needed.'"></textarea>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:4px">
+      <div class="card"><div class="card-lbl">1 — What I completed this week</div><textarea class="inp" id="rp-1" placeholder="Specific. Not 'worked on things.' List what actually got done."></textarea></div>
+      <div class="card"><div class="card-lbl">2 — What did not get done and why</div><textarea class="inp" id="rp-2" placeholder="No hiding. If it slipped, say why. This is how blockers get fixed."></textarea></div>
+      <div class="card"><div class="card-lbl">3 — Client or agent issues this week</div><textarea class="inp" id="rp-3" placeholder="Any complaints, drop-offs, or at-risk situations. Nothing hidden."></textarea></div>
+      <div class="card"><div class="card-lbl">4 — My priority for next week</div><textarea class="inp" id="rp-4" placeholder="One thing. Not a list. The one thing that moves the needle most."></textarea></div>
+      <div class="card"><div class="card-lbl">5 — What I need from the ops team</div><textarea class="inp" id="rp-5" placeholder="One specific ask. If nothing needed, write 'nothing needed.'"></textarea></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
         <button class="btn btn-p" onclick="submitReport()"><i class="ti ti-send"></i>Submit to ops team</button>
         <button class="btn" onclick="genReportHelp()"><i class="ti ti-robot"></i>AI help writing this</button>
       </div>
@@ -452,16 +489,30 @@ select.inp option{background:#0d0d1a}
         <div id="rp-ai-out" class="ai-out"></div>
       </div>
     </div>
+  </div>
+</div>
 
+<!-- API KEY MODAL -->
+<div class="modal-overlay" id="api-modal" style="display:none" onclick="if(event.target===this)closeSettings()">
+  <div class="modal">
+    <div class="modal-title">API settings</div>
+    <div class="modal-sub">Add your Anthropic API key to enable Tim Clone, content generation, and report AI. The key is stored locally in your browser only — never sent anywhere except Anthropic.</div>
+    <label class="form-lbl">Anthropic API key</label>
+    <input class="inp" id="apikey-inp" type="password" placeholder="sk-ant-api03-..." style="margin-bottom:0" onkeydown="if(event.key==='Enter')saveApiKey()">
+    <div class="modal-actions">
+      <button class="btn btn-p" onclick="saveApiKey()"><i class="ti ti-check"></i>Save key</button>
+      <button class="btn" onclick="closeSettings()">Cancel</button>
+      <button class="btn btn-danger" onclick="clearApiKey()" style="margin-left:auto"><i class="ti ti-trash"></i>Clear</button>
+    </div>
   </div>
 </div>
 
 <script>
-const IOZERA = `You are Tim Clone — an AI assistant built into the Iozera Operations Platform. You speak like Tim Ngo, CEO of Iozera: direct, clear, no corporate fluff, practical. You know everything about Iozera.
+const SYSTEM_PROMPT = `You are Tim Clone — an AI assistant built into the Iozera Operations Platform. You speak like Tim Ngo, CEO of Iozera: direct, clear, no corporate fluff, practical. You know everything about Iozera.
 
 Iozera is a sovereign AI infrastructure company based in Houston, TX. Products:
 - Upserv.ai: AI-powered service management for SMBs
-- Kriss.ai: AI clinical and dental tools for SMBs  
+- Kriss.ai: AI clinical and dental tools for SMBs
 - Chatli.ai: AI chatbot for SMB customer service
 - Ageni.ai: still in development
 - SAOS: Sales Agent Operating System being built for freelance agents
@@ -474,302 +525,269 @@ Content accounts: Iozera, Upserv.ai, Kriss.ai, Chatli.ai — only assigned peopl
 
 Be direct and practical. Short paragraphs. No em dashes. No bullet overload.`;
 
-let user={name:'',role:'',products:[],isContent:false};
-let checks=new Array(6).fill(false);
-let chatHistory=[];
-let lastCT='linkedin';
-let selAcctName='Iozera';
-let onboardings=[];
-let sessions=[];
+const K = { projects:'iozera:projects', clients:'iozera:clients', team:'iozera:team', apikey:'iozera:apikey' };
 
-// CONTENT PEOPLE — names who have content access (Sofia always has it)
-const CONTENT_ACCESS=['Sofia','Tim','sofia','tim'];
+let user = { name:'', role:'', products:[], isContent:false };
+let checks = new Array(6).fill(false);
+let chatHistory = [];
+let lastCT = 'linkedin';
+let selAcctName = 'Iozera';
+let onboardings = [];
+let sessions = [];
+const CONTENT_NAMES = ['sofia','tim'];
 
-function selRole(el,role){
+// Storage
+function store(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} }
+function load(key) { try { const v=localStorage.getItem(key); return v?JSON.parse(v):null; } catch(e){return null;} }
+function getApiKey() { return localStorage.getItem(K.apikey)||''; }
+
+// API key modal
+function openSettings() {
+  document.getElementById('apikey-inp').value = getApiKey();
+  document.getElementById('api-modal').style.display = 'flex';
+  setTimeout(()=>document.getElementById('apikey-inp').focus(),50);
+}
+function closeSettings() { document.getElementById('api-modal').style.display='none'; }
+function saveApiKey() {
+  const k = document.getElementById('apikey-inp').value.trim();
+  if (k) localStorage.setItem(K.apikey, k); else localStorage.removeItem(K.apikey);
+  closeSettings();
+}
+function clearApiKey() { localStorage.removeItem(K.apikey); document.getElementById('apikey-inp').value=''; closeSettings(); }
+
+// Mobile sidebar
+function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sb-overlay').classList.add('open'); }
+function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sb-overlay').classList.remove('open'); }
+
+// Login
+function selRole(el, role) {
   document.querySelectorAll('.role-opt').forEach(r=>r.classList.remove('sel'));
   el.classList.add('sel');
-  user.role=role;
+  user.role = role;
 }
-
-function toggleProd(el,prod){
+function toggleProd(el, prod) {
   el.classList.toggle('off');
-  const ico=el.querySelector('i');
-  if(el.classList.contains('off')){
-    ico.style.display='none';
-    user.products=user.products.filter(p=>p!==prod);
-  } else {
-    ico.style.display='';
-    if(!user.products.includes(prod))user.products.push(prod);
-  }
+  const ico = el.querySelector('i');
+  if (el.classList.contains('off')) { ico.style.display='none'; user.products=user.products.filter(p=>p!==prod); }
+  else { ico.style.display=''; if(!user.products.includes(prod)) user.products.push(prod); }
 }
-
-function doLogin(){
-  const n=document.getElementById('li-name').value.trim();
-  if(!n){alert('Please enter your name');return;}
-  if(!user.role){alert('Please select a role');return;}
-  user.name=n;
-  user.isContent=CONTENT_ACCESS.some(a=>a.toLowerCase()===n.toLowerCase())||user.role==='Operations Manager';
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('app-screen').style.display='flex';
-  document.getElementById('s-username').textContent=n+' · '+user.role;
-  document.getElementById('dash-sub').textContent='Welcome back, '+n;
-
-  // Role-based nav visibility
-  if(user.role!=='Team Leader'&&user.role!=='Onboarding Lead'){
-    document.getElementById('nav-sessions').style.display='none';
-  }
-  if(user.role!=='Onboarding Lead'&&user.role!=='Team Leader'){
-    document.getElementById('nav-onboarding').style.display='none';
-  }
-
-  // Dashboard roles
-  const roles=[user.role,...(user.products.length?['Sells: '+user.products.join(', ')]:['No products assigned'])];
-  document.getElementById('dash-roles').innerHTML=roles.map(r=>`<span class="b b-blue" style="font-size:11px;padding:4px 12px">${r}</span>`).join('');
-
-  // Content access
-  document.getElementById('content-sub').textContent=user.isContent?'Assigned — you can generate for all Iozera accounts':'Restricted access';
-  document.getElementById('content-restricted').style.display=user.isContent?'none':'block';
-  document.getElementById('content-allowed').style.display=user.isContent?'block':'none';
-
-  loadShared();
-  updateDash();
+function doLogin() {
+  const n = document.getElementById('li-name').value.trim();
+  if (!n) { alert('Please enter your name'); return; }
+  if (!user.role) { alert('Please select a role'); return; }
+  user.name = n;
+  user.isContent = CONTENT_NAMES.includes(n.toLowerCase()) || user.role==='Operations Manager';
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-screen').style.display = 'flex';
+  document.getElementById('s-username').textContent = n+' · '+user.role;
+  document.getElementById('dash-sub').textContent = 'Welcome back, '+n;
+  const isTL = user.role==='Team Leader'||user.role==='Onboarding Lead';
+  document.getElementById('nav-sessions').style.display = isTL?'':'none';
+  document.getElementById('nav-onboarding').style.display = isTL?'':'none';
+  const tags = [user.role,...(user.products.length?['Sells: '+user.products.join(', ')]:['No products assigned'])];
+  document.getElementById('dash-roles').innerHTML = tags.map(r=>`<span class="b b-blue" style="font-size:11px;padding:4px 12px">${r}</span>`).join('');
+  document.getElementById('content-sub').textContent = user.isContent?'Assigned — you can generate for all Iozera accounts':'Restricted access';
+  document.getElementById('content-restricted').style.display = user.isContent?'none':'block';
+  document.getElementById('content-allowed').style.display = user.isContent?'block':'none';
+  loadShared(); updateDash();
+  if (!getApiKey()) setTimeout(openSettings, 700);
 }
-
-function logout(){
+function logout() {
   document.getElementById('app-screen').style.display='none';
   document.getElementById('login-screen').style.display='flex';
   user={name:'',role:'',products:[],isContent:false};
-  checks=new Array(6).fill(false);
-  chatHistory=[];
+  checks=new Array(6).fill(false); chatHistory=[];
   document.getElementById('li-name').value='';
   document.querySelectorAll('.role-opt').forEach(r=>r.classList.remove('sel'));
+  document.querySelectorAll('#prod-sel .pill').forEach(p=>{ p.classList.add('off'); const i=p.querySelector('i'); if(i) i.style.display='none'; });
 }
 
-function go(id,el){
+function go(id, el) {
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('sec-'+id).classList.add('active');
   el.classList.add('active');
-  if(id==='checklist')renderTeamChecklist();
-  if(id==='dashboard'){loadShared();updateDash();}
+  closeSidebar();
+  if (id==='checklist') renderTeamChecklist();
+  if (id==='dashboard') { loadShared(); updateDash(); }
 }
 
-async function loadShared(){
-  try{
-    const p=await window.storage.get('iozera:projects',true);
-    const c=await window.storage.get('iozera:clients',true);
-    const t=await window.storage.get('iozera:team',true);
-    if(p)renderProjects(JSON.parse(p.value));
-    if(c)renderClients(JSON.parse(c.value));
-    if(t)renderTeam(JSON.parse(t.value));
-  }catch(e){}
-  updateDash();
+// Team shared data
+function loadShared() {
+  const p=load(K.projects), c=load(K.clients), t=load(K.team);
+  if(p) renderProjects(p); if(c) renderClients(c); if(t) renderTeam(t);
 }
-
-async function saveTeam(){
-  try{
-    const existing=await window.storage.get('iozera:team',true).catch(()=>null);
-    let team=existing?JSON.parse(existing.value):[];
-    const today=new Date().toDateString();
-    team=team.filter(m=>m.name!==user.name);
-    team.push({name:user.name,role:user.role,checks:checks.filter(Boolean).length,total:6,date:today});
-    await window.storage.set('iozera:team',JSON.stringify(team),true);
-  }catch(e){}
+function saveTeam() {
+  let team = load(K.team)||[];
+  const today = new Date().toDateString();
+  team = team.filter(m=>m.name!==user.name);
+  team.push({name:user.name,role:user.role,checks:checks.filter(Boolean).length,total:6,date:today});
+  store(K.team, team);
 }
-
-function renderTeam(team){
+function renderTeam(team) {
   const today=new Date().toDateString();
-  const todayTeam=team.filter(m=>m.date===today&&m.name!==user.name);
-  const dash=document.getElementById('dash-team');
-  if(!todayTeam.length){dash.innerHTML='<div class="empty">No other team members active today yet</div>';return;}
-  dash.innerHTML=todayTeam.map(m=>{
+  const others=team.filter(m=>m.date===today&&m.name!==user.name);
+  const el=document.getElementById('dash-team');
+  if(!others.length){el.innerHTML='<div class="empty">No other team members active today yet</div>';return;}
+  el.innerHTML=others.map(m=>{
     const pct=Math.round(m.checks/m.total*100);
     return `<div class="person-row">
       <div class="avatar">${m.name.substring(0,2).toUpperCase()}</div>
       <div style="flex:1"><div style="font-size:12px;color:#ccc;font-weight:500">${m.name}</div><div style="font-size:10px;color:#444">${m.role}</div></div>
-      <div style="font-size:11px;color:#555">${m.checks}/${m.total} tasks</div>
-      <div style="width:60px;height:4px;background:#0f0f1e;border-radius:2px;margin-left:8px"><div style="width:${pct}%;height:100%;background:#5b6af0;border-radius:2px"></div></div>
+      <div style="font-size:11px;color:var(--t3)">${m.checks}/${m.total}</div>
+      <div style="width:56px;height:3px;background:#0f0f1e;border-radius:2px;margin-left:8px"><div style="width:${pct}%;height:100%;background:var(--accent);border-radius:2px"></div></div>
     </div>`;
   }).join('');
 }
-
-function renderTeamChecklist(){
-  window.storage.get('iozera:team',true).then(t=>{
-    if(!t)return;
-    const team=JSON.parse(t.value);
-    const today=new Date().toDateString();
-    const el=document.getElementById('team-checklist');
-    const todayTeam=team.filter(m=>m.date===today);
-    if(!todayTeam.length){el.innerHTML='<div class="empty">No team data yet today</div>';return;}
-    el.innerHTML=todayTeam.map(m=>`
-      <div class="person-row">
-        <div class="avatar">${m.name.substring(0,2).toUpperCase()}</div>
-        <div style="flex:1;font-size:12px;color:#ccc">${m.name} <span style="color:#444;font-weight:400">· ${m.role}</span></div>
-        <span class="b ${m.checks===m.total?'b-green':m.checks>0?'b-amber':'b-gray'}">${m.checks}/${m.total} done</span>
-      </div>`).join('');
-  }).catch(()=>{});
+function renderTeamChecklist() {
+  const team=load(K.team)||[];
+  const today=new Date().toDateString();
+  const el=document.getElementById('team-checklist');
+  const todayTeam=team.filter(m=>m.date===today);
+  if(!todayTeam.length){el.innerHTML='<div class="empty">No team data yet today</div>';return;}
+  el.innerHTML=todayTeam.map(m=>`
+    <div class="person-row">
+      <div class="avatar">${m.name.substring(0,2).toUpperCase()}</div>
+      <div style="flex:1;font-size:12px;color:#ccc">${m.name} <span style="color:#444">· ${m.role}</span></div>
+      <span class="b ${m.checks===m.total?'b-green':m.checks>0?'b-amber':'b-gray'}">${m.checks}/${m.total} done</span>
+    </div>`).join('');
 }
 
-function tick(i){
+// Checklist
+function tick(i) {
   checks[i]=!checks[i];
-  const cb=document.querySelector('#ci'+i+' .cb');
-  const ct=document.querySelector('#ci'+i+' .ci-text');
-  cb.classList.toggle('on',checks[i]);
-  ct.classList.toggle('done',checks[i]);
+  document.querySelector('#ci'+i+' .cb').classList.toggle('on',checks[i]);
+  document.querySelector('#ci'+i+' .ci-text').classList.toggle('done',checks[i]);
   document.getElementById('ds-chk').textContent=checks.filter(Boolean).length+'/6';
   saveTeam();
 }
-
-function resetChecklist(){
+function resetChecklist() {
   checks.fill(false);
-  for(let i=0;i<6;i++){
-    document.querySelector('#ci'+i+' .cb').classList.remove('on');
-    document.querySelector('#ci'+i+' .ci-text').classList.remove('done');
-  }
+  for(let i=0;i<6;i++){document.querySelector('#ci'+i+' .cb').classList.remove('on');document.querySelector('#ci'+i+' .ci-text').classList.remove('done');}
   document.getElementById('ds-chk').textContent='0/6';
   saveTeam();
 }
 
-function pcol(p){return p.includes('P1')?'b-red':p.includes('P2')?'b-amber':'b-gray';}
-function scol(s){return s==='Done'?'b-green':s==='Blocked'?'b-red':s==='In progress'?'b-amber':'b-gray';}
-function tcol(t){return t.includes('Client')?'b-teal':t.includes('product')?'b-pink':'b-gray';}
-function hcol(h){return h==='On track'?'b-green':h==='At risk'?'b-amber':'b-red';}
-function stcol(s){return s.includes('Day 7')?'b-red':s.includes('Day 3')?'b-amber':s==='Active client'?'b-green':'b-blue';}
+// Badge helpers
+const pcol=p=>p.includes('P1')?'b-red':p.includes('P2')?'b-amber':'b-gray';
+const scol=s=>s==='Done'?'b-green':s==='Blocked'?'b-red':s==='In progress'?'b-amber':'b-gray';
+const tcol=t=>t.includes('Client')?'b-teal':t.includes('product')?'b-pink':'b-gray';
+const hcol=h=>h==='On track'?'b-green':h==='At risk'?'b-amber':'b-red';
+const stcol=s=>s.includes('Day 7')?'b-red':s.includes('Day 3')?'b-amber':s==='Active client'?'b-green':'b-blue';
 
-async function addProject(){
+// Projects
+function addProject() {
   const n=document.getElementById('pr-name').value.trim();
   const ty=document.getElementById('pr-type').value;
   const pr=document.getElementById('pr-priority').value;
   const cl=document.getElementById('pr-client').value.trim();
   const st=document.getElementById('pr-status').value;
-  if(!n||!ty||!pr||!st)return;
-  let projs=[];
-  try{const r=await window.storage.get('iozera:projects',true);if(r)projs=JSON.parse(r.value);}catch(e){}
+  if(!n||!ty||!pr||!st) return;
+  const projs=load(K.projects)||[];
   projs.push({id:Date.now(),name:n,type:ty,priority:pr,client:cl,status:st,owner:user.name});
-  await window.storage.set('iozera:projects',JSON.stringify(projs),true);
-  renderProjects(projs);
-  document.getElementById('pr-name').value='';
-  document.getElementById('pr-type').value='';
-  document.getElementById('pr-priority').value='';
-  document.getElementById('pr-client').value='';
-  document.getElementById('pr-status').value='';
+  store(K.projects,projs); renderProjects(projs);
+  ['pr-name','pr-client'].forEach(id=>document.getElementById(id).value='');
+  ['pr-type','pr-priority','pr-status'].forEach(id=>document.getElementById(id).value='');
   updateDash(projs);
 }
-
-function renderProjects(projs){
+function renderProjects(projs) {
   const el=document.getElementById('proj-list');
   if(!projs||!projs.length){el.innerHTML='<div class="empty">No projects yet</div>';return;}
-  const sorted=[...projs].sort((a,b)=>{const o={'P1 — urgent':0,'P2 — this week':1,'P3 — backlog':2};return o[a.priority]-o[b.priority];});
+  const ord={'P1 — urgent':0,'P2 — this week':1,'P3 — backlog':2};
+  const sorted=[...projs].sort((a,b)=>(ord[a.priority]??3)-(ord[b.priority]??3));
   el.innerHTML=sorted.map(p=>`
-    <div class="tr" style="grid-template-columns:1fr 110px 100px 110px 90px 50px">
+    <div class="tr" style="grid-template-columns:1fr 110px 100px 110px 90px 40px">
       <div style="font-weight:500;color:#ddd">${p.name}<br><span style="font-size:10px;color:#333;font-weight:400">Owner: ${p.owner}</span></div>
       <div><span class="b ${tcol(p.type)}">${p.type}</span></div>
-      <div style="color:#555;font-size:11px">${p.client||'—'}</div>
+      <div style="color:var(--t3);font-size:11px">${p.client||'—'}</div>
       <div><span class="b ${pcol(p.priority)}">${p.priority}</span></div>
       <div><span class="b ${scol(p.status)}">${p.status}</span></div>
       <div><button class="btn btn-sm" onclick="removeProject(${p.id})" style="padding:3px 7px"><i class="ti ti-x"></i></button></div>
     </div>`).join('');
 }
-
-async function removeProject(id){
-  let projs=[];
-  try{const r=await window.storage.get('iozera:projects',true);if(r)projs=JSON.parse(r.value);}catch(e){}
-  projs=projs.filter(p=>p.id!==id);
-  await window.storage.set('iozera:projects',JSON.stringify(projs),true);
-  renderProjects(projs);
-  updateDash(projs);
+function removeProject(id) {
+  let projs=(load(K.projects)||[]).filter(p=>p.id!==id);
+  store(K.projects,projs); renderProjects(projs); updateDash(projs);
 }
 
-async function addClient(){
+// Clients
+function addClient() {
   const n=document.getElementById('cl-name').value.trim();
   const pr=document.getElementById('cl-product').value;
   const st=document.getElementById('cl-stage').value;
   const ag=document.getElementById('cl-agent').value.trim();
   const h=document.getElementById('cl-health').value;
-  if(!n||!pr||!st)return;
-  let cls=[];
-  try{const r=await window.storage.get('iozera:clients',true);if(r)cls=JSON.parse(r.value);}catch(e){}
+  if(!n||!pr||!st) return;
+  const cls=load(K.clients)||[];
   cls.push({id:Date.now(),name:n,product:pr,stage:st,agent:ag,health:h,tl:user.name});
-  await window.storage.set('iozera:clients',JSON.stringify(cls),true);
-  renderClients(cls);
-  document.getElementById('cl-name').value='';
-  document.getElementById('cl-product').value='';
-  document.getElementById('cl-stage').value='';
-  document.getElementById('cl-agent').value='';
-  document.getElementById('cl-health').value='';
+  store(K.clients,cls); renderClients(cls);
+  ['cl-name','cl-agent'].forEach(id=>document.getElementById(id).value='');
+  ['cl-product','cl-stage','cl-health'].forEach(id=>document.getElementById(id).value='');
   updateDash(null,cls);
 }
-
-function renderClients(cls){
+function renderClients(cls) {
   const el=document.getElementById('client-list');
   if(!cls||!cls.length){el.innerHTML='<div class="empty">No clients tracked yet</div>';return;}
   el.innerHTML=cls.map(c=>`
-    <div class="tr" style="grid-template-columns:1fr 90px 90px 110px 110px 50px">
+    <div class="tr" style="grid-template-columns:1fr 90px 90px 110px 110px 40px">
       <div style="font-weight:500;color:#ddd">${c.name}<br><span style="font-size:10px;color:#333">TL: ${c.tl}</span></div>
-      <div style="color:#555;font-size:11px">${c.product}</div>
+      <div style="color:var(--t3);font-size:11px">${c.product}</div>
       <div><span class="b ${stcol(c.stage)}">${c.stage}</span></div>
-      <div style="color:#555;font-size:11px">${c.agent||'—'}</div>
+      <div style="color:var(--t3);font-size:11px">${c.agent||'—'}</div>
       <div><span class="b ${hcol(c.health)}">${c.health||'—'}</span></div>
       <div><button class="btn btn-sm" onclick="removeClient(${c.id})" style="padding:3px 7px"><i class="ti ti-x"></i></button></div>
     </div>`).join('');
 }
-
-async function removeClient(id){
-  let cls=[];
-  try{const r=await window.storage.get('iozera:clients',true);if(r)cls=JSON.parse(r.value);}catch(e){}
-  cls=cls.filter(c=>c.id!==id);
-  await window.storage.set('iozera:clients',JSON.stringify(cls),true);
-  renderClients(cls);
-  updateDash(null,cls);
+function removeClient(id) {
+  let cls=(load(K.clients)||[]).filter(c=>c.id!==id);
+  store(K.clients,cls); renderClients(cls); updateDash(null,cls);
 }
 
-async function updateDash(projs,cls){
-  if(!projs){try{const r=await window.storage.get('iozera:projects',true);if(r)projs=JSON.parse(r.value);}catch(e){projs=[];}}
-  if(!cls){try{const r=await window.storage.get('iozera:clients',true);if(r)cls=JSON.parse(r.value);}catch(e){cls=[];}}
-  document.getElementById('ds-proj').textContent=(projs||[]).filter(p=>p.status!=='Done').length;
-  document.getElementById('ds-cli').textContent=(cls||[]).length;
+// Dashboard stats
+function updateDash(projs, cls) {
+  if(!projs) projs=load(K.projects)||[];
+  if(!cls) cls=load(K.clients)||[];
+  document.getElementById('ds-proj').textContent=projs.filter(p=>p.status!=='Done').length;
+  document.getElementById('ds-cli').textContent=cls.length;
   document.getElementById('ds-chk').textContent=checks.filter(Boolean).length+'/6';
-  try{const t=await window.storage.get('iozera:team',true);if(t)renderTeam(JSON.parse(t.value));}catch(e){}
+  const t=load(K.team); if(t) renderTeam(t);
 }
 
-function addSession(){
+// Work sessions
+function addSession() {
   const t=document.getElementById('ws-title').value.trim();
   const d=document.getElementById('ws-date').value;
   const ti=document.getElementById('ws-time').value;
   const a=document.getElementById('ws-attendees').value.trim();
-  if(!t||!d)return;
+  if(!t||!d) return;
   sessions.push({id:Date.now(),title:t,date:d,time:ti,attendees:a});
   renderSessions();
-  document.getElementById('ws-title').value='';
-  document.getElementById('ws-date').value='';
-  document.getElementById('ws-time').value='';
-  document.getElementById('ws-attendees').value='';
+  ['ws-title','ws-date','ws-time','ws-attendees'].forEach(id=>document.getElementById(id).value='');
 }
-
-function renderSessions(){
+function renderSessions() {
   const el=document.getElementById('sessions-list');
   if(!sessions.length){el.innerHTML='<div class="empty">No sessions scheduled</div>';return;}
-  el.innerHTML=sessions.sort((a,b)=>a.date>b.date?1:-1).map(s=>`
-    <div class="tr" style="grid-template-columns:1fr 100px 80px 1fr 50px">
+  el.innerHTML=[...sessions].sort((a,b)=>a.date>b.date?1:-1).map(s=>`
+    <div class="tr" style="grid-template-columns:1fr 100px 80px 1fr 40px">
       <div style="font-weight:500;color:#ddd">${s.title}</div>
-      <div style="color:#555;font-size:11px">${s.date}</div>
-      <div style="color:#555;font-size:11px">${s.time||'—'}</div>
-      <div style="color:#555;font-size:11px">${s.attendees||'—'}</div>
+      <div style="color:var(--t3);font-size:11px">${s.date}</div>
+      <div style="color:var(--t3);font-size:11px">${s.time||'—'}</div>
+      <div style="color:var(--t3);font-size:11px">${s.attendees||'—'}</div>
       <div><button class="btn btn-sm" onclick="sessions=sessions.filter(x=>x.id!==${s.id});renderSessions()" style="padding:3px 7px"><i class="ti ti-x"></i></button></div>
     </div>`).join('');
 }
 
-function addOnboarding(){
+// Onboarding
+function addOnboarding() {
   const n=document.getElementById('ob-name').value.trim();
   const s=document.getElementById('ob-start').value;
-  if(!n)return;
+  if(!n) return;
   onboardings.push({id:Date.now(),name:n,start:s,day:1});
   renderOnboardings();
   document.getElementById('ob-name').value='';
   document.getElementById('ob-start').value='';
 }
-
-function renderOnboardings(){
+function renderOnboardings() {
   const el=document.getElementById('ob-list');
   if(!onboardings.length){el.innerHTML='<div class="empty">No active onboardings</div>';return;}
   el.innerHTML=onboardings.map(o=>`
@@ -783,104 +801,96 @@ function renderOnboardings(){
       </div>
     </div>`).join('');
 }
-
-function advanceOnboarding(id){
+function advanceOnboarding(id) {
   const o=onboardings.find(x=>x.id===id);
-  if(o&&o.day<5)o.day++;
-  else if(o&&o.day===5){onboardings=onboardings.filter(x=>x.id!==id);alert(o.name+' has completed onboarding!');}
-  renderOnboardings();
+  if(!o) return;
+  if(o.day<5){o.day++;renderOnboardings();}
+  else{onboardings=onboardings.filter(x=>x.id!==id);renderOnboardings();alert(o.name+' has completed onboarding!');}
 }
 
-function selAcct(el,name){
-  document.querySelectorAll('#acct-sel .pill').forEach(p=>{p.classList.add('off');});
+// Content account selector
+function selAcct(el, name) {
+  document.querySelectorAll('#acct-sel .pill').forEach(p=>p.classList.add('off'));
   el.classList.remove('off');
   selAcctName=name;
 }
 
-async function genContent(type){
-  if(!user.isContent)return;
-  lastCT=type;
-  const topic=document.getElementById('ct-topic').value.trim();
-  if(!topic)return;
-  const box=document.getElementById('ct-box');
-  const out=document.getElementById('ct-out');
-  box.style.display='block';
-  document.getElementById('ct-acct-label').textContent=selAcctName;
-  out.className='ai-out wait';
-  out.textContent='Generating...';
-  const voices={
-    'Iozera':'Bold, forward-thinking, sovereign AI company tone. Serious but not boring.',
-    'Upserv.ai':'Friendly, practical SMB tone. Talks to business owners directly.',
-    'Kriss.ai':'Professional, healthcare-aware, trustworthy.',
-    'Chatli.ai':'Conversational, upbeat, SMB-focused.'
-  };
-  const types={
-    linkedin:'LinkedIn post. Punchy. Short paragraphs. No dashes. No emojis. Under 150 words.',
-    announcement:'Product announcement. Professional but direct. No dashes. No emojis. Under 120 words.',
-    insight:'Thought leadership. Strong opinionated take. Short paragraphs. Under 150 words.'
-  };
-  const prompt=`You are writing content for ${selAcctName}'s LinkedIn account. Voice: ${voices[selAcctName]||'Professional and direct.'}\n\nTopic: ${topic}\n\nFormat: ${types[type]}\n\nNo em dashes. No emojis. No "excited to announce" or corporate filler. Write it.`;
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})});
-    const d=await r.json();
-    out.className='ai-out';
-    out.textContent=d.content[0].text;
-  }catch(e){out.className='ai-out';out.textContent='Error — please try again.';}
+// Claude API helper
+async function callClaude(system, messages, maxTokens=500) {
+  const key=getApiKey();
+  if(!key){openSettings();throw new Error('no-key');}
+  const body={model:'claude-sonnet-4-20250514',max_tokens:maxTokens,messages};
+  if(system) body.system=system;
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify(body)
+  });
+  if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||'API error '+res.status);}
+  const d=await res.json();
+  return d.content[0].text;
 }
 
-async function sendChat(){
+function apiErrMsg(e){return e.message==='no-key'?'Set your API key first — click the gear icon in the sidebar.':'Error: '+e.message+'. Try again.';}
+
+// Content generation
+async function genContent(type) {
+  if(!user.isContent) return;
+  lastCT=type;
+  const topic=document.getElementById('ct-topic').value.trim();
+  if(!topic) return;
+  const box=document.getElementById('ct-box'), out=document.getElementById('ct-out');
+  box.style.display='block';
+  document.getElementById('ct-acct-label').textContent=selAcctName;
+  out.className='ai-out wait'; out.textContent='Generating...';
+  const voices={Iozera:'Bold, forward-thinking, sovereign AI company tone. Serious but not boring.','Upserv.ai':'Friendly, practical SMB tone. Talks to business owners directly.','Kriss.ai':'Professional, healthcare-aware, trustworthy.','Chatli.ai':'Conversational, upbeat, SMB-focused.'};
+  const types={linkedin:'LinkedIn post. Punchy. Short paragraphs. No dashes. No emojis. Under 150 words.',announcement:'Product announcement. Professional but direct. No dashes. No emojis. Under 120 words.',insight:'Thought leadership. Strong opinionated take. Short paragraphs. Under 150 words.'};
+  const prompt=`You are writing content for ${selAcctName}'s LinkedIn account. Voice: ${voices[selAcctName]||'Professional and direct.'}\n\nTopic: ${topic}\n\nFormat: ${types[type]}\n\nNo em dashes. No emojis. No "excited to announce" or corporate filler. Write it.`;
+  try{const text=await callClaude(null,[{role:'user',content:prompt}],400);out.className='ai-out';out.textContent=text;}
+  catch(e){out.className='ai-out';out.textContent=apiErrMsg(e);}
+}
+
+// Tim Clone chat
+async function sendChat() {
   const inp=document.getElementById('chat-inp');
-  const msg=inp.value.trim();
-  if(!msg)return;
+  const msg=inp.value.trim(); if(!msg) return;
   inp.value='';
   const wrap=document.getElementById('chat-msgs');
   wrap.innerHTML+=`<div class="cm-u">${msg}</div>`;
   const thinking=document.createElement('div');
-  thinking.className='cm-a';
-  thinking.style.color='#333';
-  thinking.style.fontStyle='italic';
-  thinking.textContent='Thinking...';
-  wrap.appendChild(thinking);
-  wrap.scrollTop=wrap.scrollHeight;
+  thinking.className='cm-a'; thinking.style.cssText='color:var(--t4);font-style:italic';
+  thinking.textContent='Thinking...'; wrap.appendChild(thinking); wrap.scrollTop=wrap.scrollHeight;
   chatHistory.push({role:'user',content:msg});
-  const roleCtx=`\n\nThis person: ${user.name}, ${user.role}${user.products.length?', sells '+user.products.join(', '):''}.`;
+  const ctx=SYSTEM_PROMPT+`\n\nThis person: ${user.name}, ${user.role}${user.products.length?', sells '+user.products.join(', '):''}. `;
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:IOZERA+roleCtx,messages:chatHistory})});
-    const d=await r.json();
-    const reply=d.content[0].text;
+    const reply=await callClaude(ctx,chatHistory,600);
     chatHistory.push({role:'assistant',content:reply});
-    thinking.style.color='#888';
-    thinking.style.fontStyle='normal';
-    thinking.textContent=reply;
-  }catch(e){thinking.textContent='Error — try again.';}
+    thinking.style.cssText=''; thinking.textContent=reply;
+  }catch(e){thinking.style.cssText='';thinking.textContent=apiErrMsg(e);}
   wrap.scrollTop=wrap.scrollHeight;
 }
 
-function submitReport(){
-  const fields=['rp-1','rp-2','rp-3','rp-4','rp-5'];
-  const labels=['Completed this week','Not done + why','Client/agent issues','Priority next week','Needs from ops'];
-  let empty=false;
-  fields.forEach(f=>{if(!document.getElementById(f).value.trim())empty=true;});
+// Weekly report
+function submitReport() {
+  const empty=['rp-1','rp-2','rp-3','rp-4','rp-5'].some(f=>!document.getElementById(f).value.trim());
   if(empty){alert('Please fill in all 5 fields before submitting.');return;}
   alert('Report submitted to ops team. Thank you.');
 }
-
-async function genReportHelp(){
-  const box=document.getElementById('rp-ai-box');
-  const out=document.getElementById('rp-ai-out');
-  box.style.display='block';
-  out.className='ai-out wait';
-  out.textContent='Generating suggestions...';
-  const prompt=`${IOZERA}\n\nA ${user.role} at Iozera named ${user.name} needs help writing their weekly report. Give them 5 short prompts or suggestions — one for each field: 1) what to include in "completed this week", 2) how to frame things that didn't get done, 3) how to flag client or agent issues constructively, 4) how to identify the one priority, 5) how to frame a request from the ops team. Keep it practical and short.`;
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:prompt}]})});
-    const d=await r.json();
-    out.className='ai-out';
-    out.textContent=d.content[0].text;
-  }catch(e){out.className='ai-out';out.textContent='Error — try again.';}
+async function genReportHelp() {
+  const box=document.getElementById('rp-ai-box'), out=document.getElementById('rp-ai-out');
+  box.style.display='block'; out.className='ai-out wait'; out.textContent='Generating suggestions...';
+  const prompt=`A ${user.role} at Iozera named ${user.name} needs help writing their weekly report. Give them 5 short prompts — one per field: 1) completed this week, 2) what didn't get done and why, 3) client/agent issues, 4) one priority for next week, 5) one ask from ops team. Practical and short.`;
+  try{const text=await callClaude(SYSTEM_PROMPT,[{role:'user',content:prompt}],500);out.className='ai-out';out.textContent=text;}
+  catch(e){out.className='ai-out';out.textContent=apiErrMsg(e);}
 }
 
 function cp(id){navigator.clipboard.writeText(document.getElementById(id).textContent).catch(()=>{});}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();});
 </script>
 </body>
 </html>
