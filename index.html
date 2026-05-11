@@ -82,11 +82,16 @@ body { font-family: 'Inter', system-ui, sans-serif; }
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px; color: #fff; font-size: 13px;
   outline: none; font-family: inherit; transition: border-color 0.15s;
+  color-scheme: dark;
 }
 .inp:focus { border-color: rgba(124,58,237,0.6); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
 .inp::placeholder { color: rgba(255,255,255,0.2); }
 textarea.inp { resize: vertical; min-height: 80px; }
 select.inp option { background: #0b1020; }
+input[type="date"].inp, input[type="time"].inp {
+  background: rgba(255,255,255,0.06);
+  color: #e2e8f0;
+}
 .btn {
   padding: 8px 16px; background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
